@@ -47,14 +47,15 @@ u-blox ZED-F9R + NTRIP ──/fix──► (ตั้งตำแหน่งเ
 | `src/old_maps/GlobalMapLoop2.pcd` | 223 MB |
 
 หลัง clone ต้องคัดลอก `FullGlobalMap.pcd` มาวางที่ `src/` เอง (หรือทำแผนที่ใหม่ด้วย 1Mapping)
+แผนที่โหลดได้จาก [golfcart-maps Releases](https://github.com/Pakgard007/golfcart-maps/releases)
 แล้วตรวจ `map_path` ใน `src/lidar_localization_ros2-main/param/localization.yaml`
 
 ## ติดตั้งและ build
 
 ```bash
-git clone <url ของ repo นี้> ~/2Localize_get_path
+git clone git@github.com:Pakgard007/Localize_get_path.git ~/2Localize_get_path
 cd ~/2Localize_get_path
-# วาง FullGlobalMap.pcd ไว้ที่ src/
+# วาง FullGlobalMap.pcd ไว้ที่ src/ (โหลดจาก https://github.com/Pakgard007/golfcart-maps/releases)
 rosdep install --from-paths src --ignore-src -r -y
 sudo apt install -y python3-can can-utils python3-aenum
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
