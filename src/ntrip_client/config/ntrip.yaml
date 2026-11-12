@@ -1,0 +1,27 @@
+ntrip_client:
+  ros__parameters:
+    host: "110.78.0.54"
+    port: 2116
+    mountpoint: "VRS_RTCM32"
+    username: ""           # put the real account in config/ntrip.local.yaml (gitignored)
+    password: ""
+
+    # Measured against this caster: 0.2 s, 1 s and 10 s all yield the same
+    # ~100 B/s, so there is nothing to gain from spamming it. 1 s is standard.
+    gga_interval: 1.0
+    connect_timeout: 10.0
+    retry_interval: 5.0
+
+    rtcm_topic: "/rtcm"
+    nmea_topic: "/nmea"
+    fix_topic: "/ublox_gps_node/fix"
+
+    # Rough site position so the VRS caster starts streaming before the
+    # receiver has its own fix. Replaced as soon as a real fix or GGA arrives.
+    # It must be the site the cart is at: the caster builds the virtual base
+    # station here, and corrections for a base far away are of no use.
+    # KMUTT (GlobalMap.pcd), from the RTK fixes of 2026-10-01/02.
+    # The July site was 14.8523, 102.0802, 236.0 (08:25 2026-07-20 bag).
+    seed_latitude: 13.6517
+    seed_longitude: 100.4927
+    seed_altitude: 5.0

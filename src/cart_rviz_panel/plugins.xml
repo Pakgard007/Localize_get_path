@@ -1,0 +1,11 @@
+<library path="cart_rviz_panel">
+  <class name="cart_rviz_panel/CartPanel"
+         type="cart_rviz_panel::CartPanel"
+         base_class_type="rviz_common::Panel">
+    <description>
+      One button per golf cart start-up step (LiDAR, localization,
+      start_cart.sh, GPS, NTRIP, CBF-QP, logger). Each step runs in its own
+      terminal window; its state comes from the process table.
+    </description>
+  </class>
+</library>

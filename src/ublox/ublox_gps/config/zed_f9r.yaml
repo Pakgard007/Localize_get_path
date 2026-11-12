@@ -1,0 +1,39 @@
+# Configuration Settings for the u-blox C102-F9R board (ZED-F9R, HPS firmware)
+#
+# ZED-F9R is multi-band (L1/L2) RTK + built-in IMU sensor fusion. Needs a
+# multi-band antenna to be any better than the built-in NEO-M9N.
+#
+# The driver treats HPS firmware like HPG and always sends legacy
+# UBX-CFG-TMODE3 when configuring, which F9 firmware NACKs (same issue as the
+# ZED-F9P). So the node only reads/publishes here; configure the receiver itself:
+# ublox_gps_node_zed_f9r-launch.py does that (UBX-CFG-VALSET) before the node starts.
+ublox_gps_node:
+  ros__parameters:
+    debug: 0                    # Range 0-4 (0 = no debug statements)
+
+    # USB CDC-ACM. The CAN adapter is gs_usb (not ttyACM), so the F9R is
+    # normally ttyACM0; prefer the /dev/serial/by-id/ link if that changes.
+    device: /dev/ttyACM0
+    frame_id: gps
+
+    config_on_startup: false
+
+    # Only used for diagnostics when config_on_startup is false; keep in sync
+    # with CFG-RATE-MEAS set by ublox_gps_node_zed_f9r-launch.py (200 ms => 5 Hz).
+    rate: 5.0
+    nav_rate: 1
+
+    uart1:
+      baudrate: 38400           # Ignored on USB CDC-ACM
+
+    tmode3: 0                   # Rover; required by the HPS product code
+
+    inf:
+      all: true                 # Display all INF messages in console
+
+    publish:
+      all: true
+      aid:
+        hui: false
+      nav:
+        posecef: false

@@ -1,0 +1,19 @@
+# ROS2 colcon outputs
+build/
+install/
+log/
+
+# Local tool/editor settings
+.claude/
+.codex
+.vscode/
+
+__pycache__/
+*.pyc
+
+# Point cloud maps: too big for GitHub (>100MB). Share them separately.
+src/FullGlobalMap.pcd
+src/old_maps/*.pcd
+
+# Real NTRIP account (copy from ntrip.yaml and fill in)
+src/ntrip_client/config/ntrip.local.yaml

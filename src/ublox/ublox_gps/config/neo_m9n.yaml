@@ -1,0 +1,53 @@
+# Configuration Settings for the built-in u-blox NEO-M9N
+# (GNSS module integrated in the NEXCOM VTC 7270-C4/C8 vehicle computer).
+#
+# NEO-M9N is a Standard-Precision GNSS (SPG) receiver: single-band (L1),
+# multi-constellation, NO RTK / NO TMODE3 / NO survey-in. The driver detects
+# it as protocol >= 18 and runs UbloxFirmware9 only. Constellation setup uses
+# UBX-CFG-VALSET (no ACK required), so it does NOT hit the CFG-TMODE3 NACK
+# issue seen on the external ZED-F9P.
+ublox_gps_node:
+  ros__parameters:
+    debug: 0                    # Range 0-4 (0 = no debug statements)
+
+    # The built-in NEO-M9N in this VTC 7270 is wired to an internal UART (NOT
+    # USB): it appears on /dev/ttyS4 at 38400 baud (confirmed by NMEA output
+    # GP/GL/GA/GB talkers). Keep uart1.baudrate below in sync with this.
+    device: /dev/ttyS4
+    frame_id: gps
+
+    # If startup shows "received NACK" errors (as the F9P did), set this to
+    # false: the node then only reads/publishes and configures nothing.
+    config_on_startup: true
+
+    rate: 4.0                   # Measurement/output rate [Hz]
+    nav_rate: 1                 # Nav solution every measurement cycle (1 => 4 Hz)
+
+    dynamic_model: automotive   # Vehicle platform (NEXCOM VTC in-vehicle computer)
+    fix_mode: auto              # Allow 2D and 3D fixes
+    enable_ppp: false           # Not supported on NEO-M9N
+    dr_limit: 0                 # No dead-reckoning on plain NEO-M9N
+
+    uart1:
+      baudrate: 38400           # NEO-M9N default (ignored on USB CDC-ACM)
+
+    # NEO-M9N receives up to 4 major constellations concurrently (+ QZSS/SBAS).
+    # QZSS is useful in the Asia-Pacific region.
+    gnss:
+      gps: true
+      glonass: true
+      galileo: true
+      beidou: true
+      qzss: true
+      sbas: false               # Legacy CFG-SBAS can NACK on M9; enable if needed
+
+    inf:
+      all: true                 # Display all INF messages in console
+
+    # Enable u-blox message publishers
+    publish:
+      all: true
+      aid:
+        hui: false
+      nav:
+        posecef: false

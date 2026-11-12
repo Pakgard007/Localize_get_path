@@ -1,0 +1,58 @@
+ros_can_bridge:
+  ros__parameters:
+    can_channel: can0
+    can_bitrate: 250000
+    control_rate_hz: 50.0
+    cmd_vel_timeout_s: 0.5
+    board_timeout_s: 0.5
+    brake_cmd_can_id: 304          # 0x130
+    brake_status_can_id: 305       # 0x131
+    brake_servo_cmd_can_id: 306    # 0x132
+    brake_servo_start_deg: 180.0   # release angle, packed into 0x132 bytes 0..3
+    brake_servo_stop_deg: 110.0    # engage angle, packed into 0x132 bytes 4..7
+    wheelbase_m: 1.65
+    max_speed_mps: 5.0
+    max_steering_deg: 50.0
+    cmd_vel_steering_mode: steering_angle
+    min_speed_for_steering_mps: 0.1
+    brake_on_zero_cmd: false
+    zero_cmd_brake_release_speed_mps: 0.03
+
+joy_cmd_vel:
+  ros__parameters:
+    joy_topic: /joy
+    cmd_vel_topic: /cmd_vel
+    brake_cmd_topic: /brake_cmd
+    publish_rate_hz: 20.0
+    left_stick_y_axis: 1
+    right_stick_x_axis: 3
+    safety_button_index: 7
+    emergency_button_index: 0
+    safety_axis_index: 5
+    safety_axis_pressed_value: -1.0
+    safety_axis_threshold: 0.5
+    max_speed_mps: 3.0
+    max_steering_rad: 0.7
+    speed_deadzone: 0.05
+    steering_deadzone: 0.05
+    speed_axis_gain: 1.0
+    steering_axis_gain: 1.0
+    invert_speed_axis: false
+    invert_steering_axis: false
+    publish_zero_when_released: true
+    joy_timeout_s: 0.5
+    debug_joy: false
+
+steering_node:
+  ros__parameters:
+    can_channel: can0
+    motor_id: 1
+    tx_rate_hz: 20.0
+    cmd_timeout_s: 0.5
+    max_steering_deg: 50.0
+    counts_per_deg_pos: 180.0
+    counts_per_deg_neg: 320.0
+    enable_period_s: 1.0
+    safe_steering_deg: 0.0
+    disable_on_fault: true
+    enable_on_startup: false

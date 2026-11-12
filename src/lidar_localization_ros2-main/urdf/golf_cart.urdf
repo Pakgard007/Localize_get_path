@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!-- Written by cart_model.py from cart.yaml: change the sizes there, not here. -->
+<robot name="golf_cart">
+
+  <!-- The frame the localization moves: at the lidar's height, behind it.
+       os_sensor and imu_link hang on it from the static_transform_publisher
+       nodes in lidar_localization.launch.py, not from here. -->
+  <link name="base_link"/>
+
+  <!-- The cart's own frame: on the ground under the middle of the rear axle,
+       level, x forward. No <material>: with one, RViz would paint the whole
+       mesh in it. -->
+  <link name="cart_body">
+    <visual>
+      <geometry><mesh filename="package://lidar_localization_ros2/urdf/golf_cart.dae"/></geometry>
+    </visual>
+  </link>
+  <joint name="cart_body_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="cart_body"/>
+    <origin xyz="-0.9824 0.0257 -1.8393" rpy="0.01397 -0.02618 -0.00037"/>
+  </joint>
+
+  <link name="cart_glass">
+    <visual>
+      <geometry><mesh filename="package://lidar_localization_ros2/urdf/golf_cart_glass.dae"/></geometry>
+      <material name="glass"><color rgba="0.66 0.84 0.95 0.22"/></material>
+    </visual>
+  </link>
+  <joint name="cart_glass_joint" type="fixed">
+    <parent link="cart_body"/>
+    <child link="cart_glass"/>
+  </joint>
+
+  <link name="rtk_pole_base"/>
+  <joint name="rtk_pole_base_joint" type="fixed">
+    <parent link="cart_body"/>
+    <child link="rtk_pole_base"/>
+    <origin xyz="0.0000 0.0000 1.7560" rpy="0 0 0"/>
+  </joint>
+
+  <link name="gps"/>
+  <joint name="gps_joint" type="fixed">
+    <parent link="rtk_pole_base"/>
+    <child link="gps"/>
+    <origin xyz="0 0 0.3000" rpy="0 0 0"/>
+  </joint>
+
+</robot>
