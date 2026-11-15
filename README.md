@@ -5,6 +5,7 @@ Workspace ROS 2 (Humble) สำหรับ **หาตำแหน่งรถ�
 
 แผนที่ `.pcd` ที่ใช้ทำมาจาก workspace **1Mapping** (LIO-SAM)
 
+> 🇬🇧 **English:** ROS 2 Humble workspace that localizes the KMUTT golf cart on a prebuilt 3D map (NDT scan-to-map matching with an Ouster LiDAR) and drives it along a planned path with Pure Pursuit and a CBF-QP safety controller, sending /cmd_vel over CAN to an STM32 throttle/brake board and a KEYA steering motor. A custom RViz panel (Cart Launcher) starts every step with one button.
 ## 🎬 เดโม่
 
 <table>
@@ -17,6 +18,8 @@ Workspace ROS 2 (Humble) สำหรับ **หาตำแหน่งรถ�
     <td align="center"><sub>รถวิ่งผ่านตึกใน มจธ. ด้วย NDT localization · เร่ง 6 เท่า</sub></td>
   </tr>
 </table>
+
+<p align="center"><img src="docs/cart-launcher.png" width="90%" /><br/><sub>Cart Launcher — RViz panel ที่เปิดแต่ละขั้นด้วยปุ่มเดียว (LiDAR, Localization, Low-level, GPS, NTRIP, CBF-QP, Logger)</sub></p>
 
 ตำแหน่งเดียวกันนี้ส่งไปแสดงบนเว็บ [ModRide](https://github.com/Pakgard007/ModRide) แบบสดด้วย
 
