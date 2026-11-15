@@ -5,6 +5,21 @@ Workspace ROS 2 (Humble) สำหรับ **หาตำแหน่งรถ�
 
 แผนที่ `.pcd` ที่ใช้ทำมาจาก workspace **1Mapping** (LIO-SAM)
 
+## 🎬 เดโม่
+
+<table>
+  <tr>
+    <td width="50%"><img src="docs/rviz-chase.gif" /></td>
+    <td width="50%"><img src="docs/rviz-campus.gif" /></td>
+  </tr>
+  <tr>
+    <td align="center"><sub>มุมกล้องตามหลังรถ — สแกนสด (สีส้ม) ทับแผนที่ (สีน้ำเงิน) · เร่ง 2 เท่า</sub></td>
+    <td align="center"><sub>รถวิ่งผ่านตึกใน มจธ. ด้วย NDT localization · เร่ง 6 เท่า</sub></td>
+  </tr>
+</table>
+
+ตำแหน่งเดียวกันนี้ส่งไปแสดงบนเว็บ [ModRide](https://github.com/Pakgard007/ModRide) แบบสดด้วย
+
 ```text
 Ouster OS-1-128 ──/ouster/points──► lidar_localization_ros2 (NDT) ──/pcl_pose──┐
 GlobalMap.pcd ───────────────────►                                             │
